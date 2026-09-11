@@ -31,10 +31,6 @@ jobs:
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
-        with:
-          # Enable GitHub Pages (Actions source) on first run without needing
-          # to toggle it manually in the repository settings.
-          enablement: true
 
       - name: Install dependencies
         run: npm ci
