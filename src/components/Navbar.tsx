@@ -74,7 +74,7 @@ export default function Navbar() {
           }`}
         >
           <div className="flex items-center justify-between gap-2 h-14 px-3 sm:px-5">
-            <BrandLogo size={34} textClassName="text-[17px] hidden sm:inline" />
+            <BrandLogo size={34} textClassName="text-[15px] sm:text-[17px]" />
 
             {/* Desktop nav */}
             <div ref={linksRef} className="desktop-nav-links hidden xl:flex items-center gap-0.5 relative flex-nowrap min-w-0">
