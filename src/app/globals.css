@@ -215,6 +215,29 @@ html.theme-switching *::after {
   }
 }
 
+/*
+ * Touch devices have no real hover: a first tap would otherwise land as a
+ * "hover" (lifting the card/button and revealing overlays) and only the second
+ * tap would activate. Strip the sticky hover transforms and reveals on coarse
+ * pointers so a single tap responds immediately.
+ */
+@media (hover: none) {
+  .card-hover:hover,
+  .btn:hover,
+  .btn-primary:hover,
+  .btn-outline:hover,
+  .btn-ghost:hover,
+  .btn-danger:hover,
+  .icon-btn:hover {
+    transform: none !important;
+  }
+  .spotlight:hover::before,
+  .gradient-border:hover::after {
+    opacity: 0 !important;
+    animation: none !important;
+  }
+}
+
 @layer components {
 /* ---------- 4. Tone system (theme-aware colored chips) ----------
    Usage: <span class="tone-badge tone-green">Easy</span>
@@ -766,14 +789,14 @@ html.light .codeblock { background: #0f172a; color: #e2e8f0; border-color: #1e29
 
 /* ---------- 12. Page transitions ---------- */
 @keyframes pageFadeIn {
-  from { opacity: 0; transform: translateY(6px); }
+  from { opacity: 0; transform: translateY(4px); }
   /* `none`, not translateY(0): a zero transform still establishes a containing
      block, which would trap position:fixed descendants (modals) inside <main>
      instead of the viewport once the animation settles (fill mode: both). */
   to   { opacity: 1; transform: none; }
 }
 .page-transition {
-  animation: pageFadeIn 0.25s ease-out both;
+  animation: pageFadeIn 0.16s ease-out both;
   min-height: 60vh;
 }
 
