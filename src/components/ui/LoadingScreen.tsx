@@ -56,7 +56,7 @@ export default function LoadingScreen() {
           >
             <div className="relative">
               <div className="absolute -inset-6 rounded-[28px] border border-primary/15 animate-ping-ring" />
-              <div className="rounded-[24px] shadow-lg overflow-hidden">
+              <div className="[filter:drop-shadow(0_0_24px_rgb(var(--glow)/0.45))]">
                 <BrandMark size={84} draw />
               </div>
             </div>
