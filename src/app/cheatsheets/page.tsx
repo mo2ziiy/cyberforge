@@ -33,7 +33,7 @@ export default function CheatsheetsPage() {
         subtitle="Essential commands, shortcuts, and techniques for every security tool and domain. Copy with one click."
       />
 
-      <motion.div variants={stagger(0, 0.06)} initial="hidden" animate="visible" className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <motion.div variants={stagger(0, 0.06)} initial="hidden" animate="visible" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {cheatsheets.map((cs) => {
           const count = cs.sections.reduce((acc, s) => acc + s.items.length, 0);
           const Icon = csIconMap[cs.id] ?? FileText;

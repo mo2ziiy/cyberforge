@@ -72,7 +72,7 @@ export default async function CheatSheetDetailPage({ params }: { params: Promise
         </div>
       </div>
 
-      <div className="grid lg:grid-cols-[220px_1fr] gap-8 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-[220px_1fr] gap-8 items-start">
         {/* Sticky TOC */}
         <aside className="hidden lg:block sticky top-24">
           <p className="eyebrow mb-3 text-[10px]">On this page</p>

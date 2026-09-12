@@ -24,7 +24,7 @@ export default function QuizPage() {
         subtitle="Test and reinforce your knowledge with interactive quizzes covering every major security domain. Instant feedback, clear explanations."
       />
 
-      <motion.div variants={stagger(0, 0.06)} initial="hidden" animate="visible" className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <motion.div variants={stagger(0, 0.06)} initial="hidden" animate="visible" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {quizzes.map((quiz) => {
           const QuizIcon = quiz.icon ? iconMap[quiz.icon] ?? HelpCircle : HelpCircle;
           const toneCls = `tone-${quizCategoryTone[quiz.category] ?? "primary"}`;

@@ -102,7 +102,7 @@ export default function HomePage() {
         <div className="absolute bottom-[10%] right-[8%] w-[24rem] h-[24rem] rounded-full blur-[80px] pointer-events-none" style={{ background: "color-mix(in srgb, var(--secondary) 18%, transparent)" }} />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-24 w-full">
-          <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-14 lg:gap-10 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-14 lg:gap-10 items-center">
             <div className="text-center lg:text-left">
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
@@ -247,7 +247,7 @@ export default function HomePage() {
             <p className="text-muted text-lg max-w-2xl mx-auto">Nine tightly connected modules. Learn a concept, grab the tool, run the lab, pass the quiz.</p>
           </Reveal>
 
-          <motion.div variants={stagger(0, 0.05)} initial="hidden" whileInView="visible" viewport={viewportOnce} className="grid md:grid-cols-3 gap-4 md:auto-rows-[200px]">
+          <motion.div variants={stagger(0, 0.05)} initial="hidden" whileInView="visible" viewport={viewportOnce} className="grid grid-cols-1 md:grid-cols-3 gap-4 md:auto-rows-[200px]">
             {features.map((f) => {
               const Icon = f.icon;
               return (
@@ -286,7 +286,7 @@ export default function HomePage() {
 
       {/* ========= LEARNING FLOW ========= */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-12 items-center">
           <Reveal>
             <p className="eyebrow mb-4">A path that connects</p>
             <h2 className="text-section mb-4">
@@ -309,7 +309,7 @@ export default function HomePage() {
             </div>
           </Reveal>
 
-          <motion.div variants={stagger(0.1, 0.1)} initial="hidden" whileInView="visible" viewport={viewportOnce} className="grid sm:grid-cols-3 gap-4">
+          <motion.div variants={stagger(0.1, 0.1)} initial="hidden" whileInView="visible" viewport={viewportOnce} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
               { icon: Map, tone: "tone-emerald", value: COUNTS.tracks, label: "Learning tracks", desc: "Beginner-to-advanced roadmaps for every security domain." },
               { icon: Wrench, tone: "tone-cyan", value: COUNTS.tools, label: "Security tools", desc: "Curated tools with install guides, commands, and real use cases." },
@@ -337,7 +337,7 @@ export default function HomePage() {
       <section className="relative py-20 overflow-hidden">
         <div className="absolute inset-0 bg-surface/40" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <Reveal className="flex items-center justify-center order-2 lg:order-1">
               <CyberOrb />
             </Reveal>
@@ -388,7 +388,7 @@ export default function HomePage() {
         <Reveal delay={0.1}>
           <div className="card hairline-top overflow-hidden">
             <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none" />
-            <div className="relative grid lg:grid-cols-2">
+            <div className="relative grid grid-cols-1 lg:grid-cols-2">
               <div className="p-8 sm:p-10 lg:border-r border-border flex flex-col">
                 <h3 className="font-display text-2xl sm:text-3xl font-bold mb-3">
                   Have a question or <span className="text-gradient">suggestion?</span>
@@ -494,7 +494,7 @@ export default function HomePage() {
                       </div>
                     </div>
 
-                    <div className="grid sm:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <label className="block text-xs font-semibold text-muted mb-2">Name</label>
                         <div className="relative">

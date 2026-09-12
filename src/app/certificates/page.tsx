@@ -163,7 +163,7 @@ export default function CertificatesPage() {
       </p>
 
       <AnimatePresence mode="wait">
-        <motion.div key={activeLevel + activeCategory} variants={stagger(0, 0.05)} initial="hidden" animate="visible" className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <motion.div key={activeLevel + activeCategory} variants={stagger(0, 0.05)} initial="hidden" animate="visible" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {filtered.map((cert) => {
             const toneCls = `tone-${certColorTone[cert.color] ?? "blue"}`;
             return (

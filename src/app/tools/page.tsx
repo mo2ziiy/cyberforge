@@ -60,7 +60,7 @@ function ToolsContent() {
       </div>
 
       <AnimatePresence mode="wait">
-        <motion.div key={activeCategory + search} variants={stagger(0, 0.04)} initial="hidden" animate="visible" className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <motion.div key={activeCategory + search} variants={stagger(0, 0.04)} initial="hidden" animate="visible" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {filtered.map((tool) => (
             <motion.div key={tool.slug} variants={fadeUp}>
               <Link href={`/tools/${tool.slug}`} className="group block h-full">

@@ -27,7 +27,7 @@ export default function RoadmapsPage() {
         subtitle="Structured three-level paths, from Beginner to Advanced, for every cybersecurity domain, with hand-picked resources at each step."
       />
 
-      <motion.div variants={stagger(0, 0.06)} initial="hidden" animate="visible" className="grid md:grid-cols-2 gap-4">
+      <motion.div variants={stagger(0, 0.06)} initial="hidden" animate="visible" className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {tracks.map((track) => {
           const Icon = trackIconMap[track.id];
           const roadmap = roadmaps.find((r) => r.trackId === track.id);

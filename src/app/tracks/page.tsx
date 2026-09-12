@@ -21,7 +21,7 @@ export default function TracksPage() {
         subtitle="Explore every major security domain. Each track includes a structured roadmap, related tools, key topics, and a quiz to test yourself."
       />
 
-      <motion.div variants={stagger(0, 0.07)} initial="hidden" animate="visible" className="grid md:grid-cols-2 gap-5">
+      <motion.div variants={stagger(0, 0.07)} initial="hidden" animate="visible" className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {tracks.map((track, idx) => {
           const Icon = trackIconMap[track.id];
           const quizId = quizIdForTrack(track.id);

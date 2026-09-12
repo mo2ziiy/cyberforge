@@ -174,7 +174,7 @@ export default function TrackDetailView({ track, detail }: { track: Track; detai
         <motion.div key={tab} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }} transition={{ duration: 0.2, ease: EASE }}>
           {/* ---------- OVERVIEW ---------- */}
           {tab === "Overview" && (
-            <div className="grid lg:grid-cols-[1fr_310px] gap-6 items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_310px] gap-6 items-start">
               <div className="space-y-6 min-w-0">
                 <section className="card p-6">
                   <h2 className="font-display text-lg font-bold mb-4 flex items-center gap-2.5">
@@ -310,7 +310,7 @@ export default function TrackDetailView({ track, detail }: { track: Track; detai
                           {level.topics.length} topics · {level.resources.length} resources
                         </span>
                       </div>
-                      <div className="p-6 grid md:grid-cols-2 gap-6">
+                      <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                           <h3 className="eyebrow mb-3 text-[10px]">
                             <Target size={11} /> Topics
@@ -358,7 +358,7 @@ export default function TrackDetailView({ track, detail }: { track: Track; detai
                 <span className="text-foreground font-semibold tabular-nums">{trackTools.length}</span> tools from the{" "}
                 {detail.toolCategories.join(", ")} {detail.toolCategories.length > 1 ? "categories" : "category"}.
               </p>
-              <div className="grid md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {trackTools.map((t) => (
                   <Link key={t.slug} href={`/tools/${t.slug}`} className="group block h-full">
                     <SpotlightCard className="h-full p-5">
@@ -432,7 +432,7 @@ export default function TrackDetailView({ track, detail }: { track: Track; detai
               {extraQuizzes.length > 0 && (
                 <div>
                   <p className="eyebrow mb-3 text-[10px]">Also worth taking</p>
-                  <div className="grid sm:grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {extraQuizzes.map((q) => (
                       <Link key={q.id} href={`/quiz/${q.id}`} className="card card-hover p-4 flex items-center gap-3 group">
                         <span className="tone-icon tone-slate w-10 h-10 rounded-xl shrink-0">

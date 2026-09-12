@@ -106,7 +106,7 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
             <Newspaper size={18} className="text-primary" />
             Related articles
           </h2>
-          <div className="grid sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {related.map((a) => (
               <Link key={a.id} href={`/news/${a.id}`} className={`group block h-full tone-${newsCategoryTone[a.category] ?? "slate"}`}>
                 <div className="card card-hover h-full overflow-hidden flex flex-col">

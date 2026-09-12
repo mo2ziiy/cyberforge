@@ -60,7 +60,7 @@ export default function WriteupsPage() {
       </p>
 
       <AnimatePresence mode="wait">
-        <motion.div key={activePlatform + activeCategory + activeDifficulty + search} variants={stagger(0, 0.04)} initial="hidden" animate="visible" className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <motion.div key={activePlatform + activeCategory + activeDifficulty + search} variants={stagger(0, 0.04)} initial="hidden" animate="visible" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {filtered.map((w) => (
             <motion.div key={w.id} variants={fadeUp}>
               <Link href={`/writeups/${w.id}`} className="group block h-full">

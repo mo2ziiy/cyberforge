@@ -100,7 +100,7 @@ export default async function WriteupDetailPage({ params }: { params: Promise<{ 
         </div>
       </div>
 
-      <div className="grid lg:grid-cols-[1fr_290px] gap-6 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_290px] gap-6 items-start">
         <div className="space-y-5 min-w-0">
           {/* Overview */}
           <section className="card p-6">

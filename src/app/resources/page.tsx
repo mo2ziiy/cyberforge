@@ -110,7 +110,7 @@ export default function ResourcesPage() {
               Showing <span className="text-foreground font-semibold tabular-nums">{filteredResources.length}</span> resources
             </p>
 
-            <motion.div key={activeCategory + activeType + search} variants={stagger(0, 0.03)} initial="hidden" animate="visible" className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <motion.div key={activeCategory + activeType + search} variants={stagger(0, 0.03)} initial="hidden" animate="visible" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {filteredResources.map((resource) => (
                 <motion.div key={resource.name} variants={fadeUp}>
                   <a href={resource.url} target="_blank" rel="noopener noreferrer" className="group block h-full">
@@ -161,7 +161,7 @@ export default function ResourcesPage() {
               Showing <span className="text-foreground font-semibold tabular-nums">{filteredBooks.length}</span> books
             </p>
 
-            <motion.div key={bookCategory + bookSearch} variants={stagger(0, 0.04)} initial="hidden" animate="visible" className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+            <motion.div key={bookCategory + bookSearch} variants={stagger(0, 0.04)} initial="hidden" animate="visible" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
               {filteredBooks.map((book) => (
                 <motion.div key={book.title} variants={fadeUp}>
                   <a href={book.url} target="_blank" rel="noopener noreferrer" className="group block h-full">

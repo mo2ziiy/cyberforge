@@ -23,7 +23,7 @@ export function SkeletonCard({ lines = 3 }: { lines?: number }) {
 
 export function SkeletonGrid({ count = 6, cols = 3 }: { count?: number; cols?: number }) {
   const colClass =
-    cols === 2 ? "grid sm:grid-cols-2 gap-5" : cols === 4 ? "grid sm:grid-cols-2 lg:grid-cols-4 gap-5" : "grid md:grid-cols-2 lg:grid-cols-3 gap-5";
+    cols === 2 ? "grid grid-cols-1 sm:grid-cols-2 gap-5" : cols === 4 ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5";
 
   return (
     <div className={colClass}>

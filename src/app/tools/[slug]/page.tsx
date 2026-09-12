@@ -60,7 +60,7 @@ export default async function ToolDetailPage({ params }: { params: Promise<{ slu
         </div>
       </div>
 
-      <div className="grid lg:grid-cols-[1fr_280px] gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-6">
         <div className="space-y-6 min-w-0">
           {/* Installation */}
           <section className="card overflow-hidden animate-fade-up" style={{ animationDelay: "60ms" }}>
@@ -91,7 +91,7 @@ export default async function ToolDetailPage({ params }: { params: Promise<{ slu
             </div>
             <ul className="divide-y divide-border">
               {tool.commands.map((cmd, i) => (
-                <li key={i} className="group grid sm:grid-cols-[1fr_auto] gap-2 sm:gap-4 px-5 py-3.5 hover:bg-surface-2 transition-colors">
+                <li key={i} className="group grid grid-cols-1 sm:grid-cols-[1fr_auto] gap-2 sm:gap-4 px-5 py-3.5 hover:bg-surface-2 transition-colors">
                   <div className="min-w-0">
                     <code className="text-primary font-mono text-[13px] break-all leading-relaxed">{cmd.command}</code>
                     <p className="text-sm text-muted mt-1 leading-snug">{cmd.description}</p>

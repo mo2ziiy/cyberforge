@@ -169,7 +169,7 @@ export default function RoadmapBoard({ roadmap, track, detail }: { roadmap: Road
       </div>
 
       {/* ========= THREE-COLUMN LEVELS ========= */}
-      <div className="grid lg:grid-cols-3 gap-5 mb-8 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-8 items-start">
         {roadmap.levels.map((level, i) => {
           const cfg = levelConfig[level.level];
           const { completed, total, pct } = levelProgress(level);
@@ -278,7 +278,7 @@ export default function RoadmapBoard({ roadmap, track, detail }: { roadmap: Road
               See all for this track
             </Link>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {trackTools.map((t) => (
               <Link key={t.slug} href={`/tools/${t.slug}`} className="card card-hover p-3.5 flex items-center gap-3 group">
                 <LogoImage src={t.logo} name={t.name} size={20} />

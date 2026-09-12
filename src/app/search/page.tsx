@@ -140,7 +140,7 @@ function SearchContent() {
       {debounced.trim() && visible.length === 0 && <EmptyState title="No results" description="Try different keywords or a broader term." />}
 
       {!debounced.trim() && (
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mt-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mt-8">
           {(Object.keys(typeMeta) as ResultType[]).slice(0, 4).map((t) => {
             const Icon = typeMeta[t].icon;
             const total = t === "tool" ? tools.length : t === "cheatsheet" ? cheatsheets.length : t === "lab" ? labs.length : resources.length;

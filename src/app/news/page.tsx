@@ -66,7 +66,7 @@ export default function NewsPage() {
             <span className="text-sm text-muted">Top stories right now</span>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {breaking.map((article) => (
               <Link key={article.id} href={`/news/${article.id}`} className="group block">
                 <SpotlightCard className="overflow-hidden h-full">
@@ -114,7 +114,7 @@ export default function NewsPage() {
       </p>
 
       <AnimatePresence mode="wait">
-        <motion.div key={activeCategory + search} variants={stagger(0, 0.04)} initial="hidden" animate="visible" className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <motion.div key={activeCategory + search} variants={stagger(0, 0.04)} initial="hidden" animate="visible" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {mainArticles.map((article) => (
             <motion.div key={article.id} variants={fadeUp}>
               <Link href={`/news/${article.id}`} className="group block h-full">
