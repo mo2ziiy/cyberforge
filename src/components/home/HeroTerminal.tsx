@@ -14,7 +14,7 @@ const SCRIPT: Line[] = [
   { text: "[!] weakness found: privilege-escalation", cls: "text-warning", delay: 600 },
   { text: "    -> roadmap: penetration-testing/intermediate", cls: "text-muted", delay: 300 },
   { text: "    -> cheat sheet: privilege-escalation", cls: "text-muted", delay: 250 },
-  { text: "[ok] learning path generated  (+10 XP)", cls: "text-success", delay: 700 },
+  { text: "[ok] learning path generated", cls: "text-success", delay: 700 },
   { text: "$ _", cls: "text-foreground", delay: 900 },
 ];
 

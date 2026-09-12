@@ -92,21 +92,55 @@ export default function CyberOrb() {
   const raf = useRef(0);
   const prevT = useRef(0);
   const rotR = useRef(rot);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   // keep a mutable mirror for pointer handlers (synced after render)
   useEffect(() => {
     rotR.current = rot;
   }, [rot]);
 
+  // The auto-spin re-renders the whole SVG (16 nodes + 8 rings + orbit, each
+  // gaussian-blurred) every frame, which is expensive. Only run it while the
+  // orb is actually on screen and the tab is visible, and never for visitors
+  // who prefer reduced motion — dragging still works without the loop.
   useEffect(() => {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let visible = true;
+    let running = false;
+
     const loop = (now: number) => {
       const dt = prevT.current ? Math.min(now - prevT.current, 50) : 0;
       prevT.current = now;
       setRot((r) => ({ x: r.x, y: drag.current.on ? r.y : r.y + dt * 0.00032, t: r.t + dt * 0.001 }));
       raf.current = requestAnimationFrame(loop);
     };
-    raf.current = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(raf.current);
+    const start = () => {
+      if (running || reduce || visible === false || document.hidden) return;
+      running = true;
+      prevT.current = 0;
+      raf.current = requestAnimationFrame(loop);
+    };
+    const stop = () => {
+      running = false;
+      cancelAnimationFrame(raf.current);
+    };
+
+    const io = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      visible ? start() : stop();
+    }, { threshold: 0 });
+    if (containerRef.current) io.observe(containerRef.current);
+
+    const onVisibility = () => (document.hidden ? stop() : start());
+    document.addEventListener("visibilitychange", onVisibility);
+
+    start();
+
+    return () => {
+      stop();
+      io.disconnect();
+      document.removeEventListener("visibilitychange", onVisibility);
+    };
   }, []);
 
   const onDown = useCallback((e: React.PointerEvent) => {
@@ -158,6 +192,7 @@ export default function CyberOrb() {
 
   return (
     <div
+      ref={containerRef}
       className="relative select-none cursor-grab active:cursor-grabbing touch-none"
       onPointerDown={onDown}
       onPointerMove={onMove}

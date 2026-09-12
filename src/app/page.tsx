@@ -3,7 +3,7 @@
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Wrench,
   FileText,
@@ -13,10 +13,8 @@ import {
   Search,
   ArrowRight,
   Shield,
-  Zap,
   Terminal,
   ChevronRight,
-  Flame,
   Award,
   BookMarked,
   Brain,
@@ -43,7 +41,7 @@ import {
 import { tracks } from "@/data/tracks";
 import { trackIconMap, trackToneClass } from "@/lib/trackIcons";
 import { SITE } from "@/lib/site";
-import { COUNTS, DEFAULT_XP_PER_TOPIC, POINTS_PER_TOPIC } from "@/lib/counts";
+import { COUNTS } from "@/lib/counts";
 import { fadeUp, stagger, viewportOnce, EASE } from "@/lib/motion";
 import ParticleBackground from "@/components/ui/ParticleBackground";
 import StatCard from "@/components/ui/StatCard";
@@ -90,17 +88,9 @@ const features = [
 ];
 
 export default function HomePage() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [contactForm, setContactForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [contactStatus, setContactStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [contactType, setContactType] = useState("General");
-
-  useEffect(() => {
-    fetch("/api/auth/me")
-      .then((r) => (r.ok ? r.json() : null))
-      .then((data) => setIsLoggedIn(Boolean(data?.user)))
-      .catch(() => {});
-  }, []);
 
   return (
     <div className="overflow-x-clip">
@@ -108,8 +98,8 @@ export default function HomePage() {
       <section className="relative min-h-[92vh] flex items-center overflow-hidden">
         <ParticleBackground />
         <div className="absolute inset-0 bg-grid opacity-40 mask-fade-y pointer-events-none" />
-        <div className="absolute top-1/4 left-[10%] w-[30rem] h-[30rem] rounded-full blur-[120px] animate-pulse-soft pointer-events-none" style={{ background: "rgb(var(--glow) / 0.12)" }} />
-        <div className="absolute bottom-[10%] right-[8%] w-[26rem] h-[26rem] rounded-full blur-[120px] animate-float-slow pointer-events-none" style={{ background: "color-mix(in srgb, var(--secondary) 18%, transparent)" }} />
+        <div className="absolute top-1/4 left-[10%] w-[28rem] h-[28rem] rounded-full blur-[80px] pointer-events-none" style={{ background: "rgb(var(--glow) / 0.12)" }} />
+        <div className="absolute bottom-[10%] right-[8%] w-[24rem] h-[24rem] rounded-full blur-[80px] pointer-events-none" style={{ background: "color-mix(in srgb, var(--secondary) 18%, transparent)" }} />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-24 w-full">
           <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-14 lg:gap-10 items-center">
@@ -294,22 +284,22 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ========= GAMIFICATION ========= */}
+      {/* ========= LEARNING FLOW ========= */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-12 items-center">
           <Reveal>
-            <p className="eyebrow mb-4">Gamified learning</p>
+            <p className="eyebrow mb-4">A path that connects</p>
             <h2 className="text-section mb-4">
-              Build the habit.
+              Learn it.
               <br />
-              <span className="text-gradient">Level up daily.</span>
+              <span className="text-gradient">Then actually do it.</span>
             </h2>
             <p className="text-muted text-lg leading-relaxed mb-8">
-              Every completed topic earns XP. Daily streaks unlock milestones. Your dashboard shows exactly where you stand across all {COUNTS.tracks} domains.
+              Every domain ties together: read the roadmap, grab the right tool, run the lab, then test yourself with a quiz — all {COUNTS.tracks} tracks structured the same way, so you always know the next step.
             </p>
             <div className="flex flex-wrap gap-3">
-              <Link href={isLoggedIn ? "/dashboard" : "/sign-up"} className="btn btn-primary">
-                {isLoggedIn ? "Open dashboard" : "Start earning XP"}
+              <Link href="/roadmaps" className="btn btn-primary">
+                Explore roadmaps
                 <ArrowRight size={16} />
               </Link>
               <Link href="/quiz" className="btn btn-outline">
@@ -320,70 +310,25 @@ export default function HomePage() {
           </Reveal>
 
           <motion.div variants={stagger(0.1, 0.1)} initial="hidden" whileInView="visible" viewport={viewportOnce} className="grid sm:grid-cols-3 gap-4">
-            <motion.div variants={fadeUp} className="tone-primary">
-              <SpotlightCard className="p-6 h-full">
-                <div className="tone-icon w-11 h-11 rounded-xl mb-5">
-                  <Zap size={20} />
-                </div>
-                <div className="font-display text-3xl font-bold tone-text tabular-nums mb-1">
-                  {/* Signed-out visitors get a stable headline number rather than a counter that reads 0. */}
-                  {isLoggedIn ? <>+<Counter value={POINTS_PER_TOPIC} /></> : <>+{DEFAULT_XP_PER_TOPIC}</>}
-                  <span className="text-base text-muted font-medium ml-1">XP</span>
-                </div>
-                <h3 className="font-semibold mb-1">Per topic</h3>
-                <p className="text-xs text-muted leading-relaxed">Complete topics, favorite tools, and log in daily to grow your score.</p>
-              </SpotlightCard>
-            </motion.div>
-
-            <motion.div variants={fadeUp} className="tone-orange">
-              <SpotlightCard className="p-6 h-full">
-                <div className="tone-icon w-11 h-11 rounded-xl mb-5">
-                  <Flame size={20} className="animate-flame" />
-                </div>
-                <div className="flex items-end gap-1 mb-3 h-9">
-                  {[40, 60, 45, 80, 65, 90, 100].map((h, i) => (
-                    <motion.span
-                      key={i}
-                      initial={{ height: 0 }}
-                      whileInView={{ height: `${h}%` }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.3 + i * 0.06, duration: 0.5, ease: EASE }}
-                      className="flex-1 rounded-sm"
-                      style={{ background: `rgb(var(--tone) / ${0.35 + i * 0.09})` }}
-                    />
-                  ))}
-                </div>
-                <h3 className="font-semibold mb-1">Daily streaks</h3>
-                <p className="text-xs text-muted leading-relaxed">Milestones at 3, 7, 14, 30 and 100 days keep you coming back.</p>
-              </SpotlightCard>
-            </motion.div>
-
-            <motion.div variants={fadeUp} className="tone-emerald">
-              <SpotlightCard className="p-6 h-full">
-                <div className="relative w-16 h-16 mb-4">
-                  <svg viewBox="0 0 64 64" className="w-16 h-16 -rotate-90">
-                    <circle cx="32" cy="32" r="26" fill="none" stroke="rgb(var(--tone) / 0.15)" strokeWidth="6" />
-                    <motion.circle
-                      cx="32"
-                      cy="32"
-                      r="26"
-                      fill="none"
-                      stroke="rgb(var(--tone))"
-                      strokeWidth="6"
-                      strokeLinecap="round"
-                      strokeDasharray={2 * Math.PI * 26}
-                      initial={{ strokeDashoffset: 2 * Math.PI * 26 }}
-                      whileInView={{ strokeDashoffset: 2 * Math.PI * 26 * 0.32 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 1.4, delay: 0.3, ease: EASE }}
-                    />
-                  </svg>
-                  <span className="absolute inset-0 flex items-center justify-center font-display font-bold text-sm tone-text">68%</span>
-                </div>
-                <h3 className="font-semibold mb-1">Track progress</h3>
-                <p className="text-xs text-muted leading-relaxed">Per-domain progress rings and achievements on your profile.</p>
-              </SpotlightCard>
-            </motion.div>
+            {[
+              { icon: Map, tone: "tone-emerald", value: COUNTS.tracks, label: "Learning tracks", desc: "Beginner-to-advanced roadmaps for every security domain." },
+              { icon: Wrench, tone: "tone-cyan", value: COUNTS.tools, label: "Security tools", desc: "Curated tools with install guides, commands, and real use cases." },
+              { icon: Brain, tone: "tone-fuchsia", value: COUNTS.quizzes, label: "Practice quizzes", desc: "Interactive quizzes to check what actually stuck." },
+            ].map(({ icon: Icon, tone, value, label, desc }) => (
+              <motion.div key={label} variants={fadeUp} className={tone}>
+                <SpotlightCard className="p-6 h-full">
+                  <div className="tone-icon w-11 h-11 rounded-xl mb-5">
+                    <Icon size={20} />
+                  </div>
+                  <div className="font-display text-3xl font-bold tone-text tabular-nums mb-1">
+                    <Counter value={value} />
+                    <span className="text-base text-muted font-medium ml-1">+</span>
+                  </div>
+                  <h3 className="font-semibold mb-1">{label}</h3>
+                  <p className="text-xs text-muted leading-relaxed">{desc}</p>
+                </SpotlightCard>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </section>
@@ -501,8 +446,8 @@ export default function HomePage() {
                     <div className="tone-icon tone-green w-16 h-16 rounded-full mb-5">
                       <CheckCircle2 size={30} />
                     </div>
-                    <h3 className="font-display text-xl font-bold mb-2">Message sent</h3>
-                    <p className="text-muted text-sm leading-relaxed mb-6 max-w-xs">Thanks for reaching out. We&apos;ll get back to you as soon as possible.</p>
+                    <h3 className="font-display text-xl font-bold mb-2">Your mail app is opening</h3>
+                    <p className="text-muted text-sm leading-relaxed mb-6 max-w-xs">We&apos;ve drafted your message in your email client — just hit send and it&apos;s on its way.</p>
                     <button
                       onClick={() => {
                         setContactStatus("idle");
@@ -515,19 +460,17 @@ export default function HomePage() {
                   </motion.div>
                 ) : (
                   <form
-                    onSubmit={async (e) => {
+                    onSubmit={(e) => {
                       e.preventDefault();
                       setContactStatus("sending");
                       try {
-                        const res = await fetch("/api/contact", {
-                          method: "POST",
-                          headers: { "Content-Type": "application/json" },
-                          body: JSON.stringify({ ...contactForm, type: contactType }),
-                        });
-                        if (res.ok) {
-                          setContactStatus("success");
-                          setContactForm({ name: "", email: "", subject: "", message: "" });
-                        } else setContactStatus("error");
+                        // No backend — hand the message off to the visitor's own
+                        // mail client via a prefilled mailto link.
+                        const subject = `[${contactType}] ${contactForm.subject}`;
+                        const body = `Name: ${contactForm.name}\nEmail: ${contactForm.email}\n\n${contactForm.message}`;
+                        window.location.href = `mailto:${SITE.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                        setContactStatus("success");
+                        setContactForm({ name: "", email: "", subject: "", message: "" });
                       } catch {
                         setContactStatus("error");
                       }
@@ -624,17 +567,17 @@ export default function HomePage() {
 
             <div className="relative px-8 md:px-16 py-16 text-center">
               <p className="eyebrow justify-center mb-5">
-                <Trophy size={12} className="text-warning" /> Free to get started
+                <Trophy size={12} className="text-warning" /> Free &amp; open — no sign-up
               </p>
               <h2 className="text-section mb-4">
                 Start your <span className="text-gradient">security journey</span>
               </h2>
               <p className="text-muted text-lg max-w-xl mx-auto mb-9 leading-relaxed">
-                Create a free account to track progress, bookmark resources, earn XP, and keep your favorite tools one click away.
+                Dive into the full library — tools, cheat sheets, roadmaps, labs, quizzes, and writeups. No account, no paywall. Just open a track and go.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <Link href={isLoggedIn ? "/dashboard" : "/sign-up"} className="btn btn-primary btn-lg group">
-                  {isLoggedIn ? "Go to dashboard" : "Create free account"}
+                <Link href="/tracks" className="btn btn-primary btn-lg group">
+                  Explore tracks
                   <ArrowRight size={17} className="transition-transform group-hover:translate-x-0.5" />
                 </Link>
                 <Link href="/roadmaps" className="btn btn-outline btn-lg">

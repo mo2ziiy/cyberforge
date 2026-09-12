@@ -7,7 +7,15 @@ interface BrandMarkProps {
   draw?: boolean;
 }
 
-/** The CyberForge mark: a shield forged around a flame. Pure SVG, theme aware. */
+/**
+ * The CyberForge mark: a bold gradient shield with a forge flame cut out of it.
+ * A solid silhouette (rather than a thin outline) so it stays crisp and legible
+ * at small navbar/footer sizes. Pure SVG, theme aware, self-rounded.
+ */
+const SHIELD = "M32 8.5 L51.5 16 L51.5 31 C51.5 43 42.8 52.8 32 56.8 C21.2 52.8 12.5 43 12.5 31 L12.5 16 Z";
+const FLAME =
+  "M32 22 C32 22 39.2 27.6 39.2 33.6 C39.2 37.8 35.9 41 32 41 C28.1 41 25 37.9 25 34 C25 30.4 27.4 27.9 27.4 27.9 C27.4 27.9 28 31.7 30.1 31.7 C30.1 31.7 28.2 28 32 22 Z";
+
 export function BrandMark({ size = 36, className = "", draw = false }: BrandMarkProps) {
   const id = draw ? "cf-grad-draw" : "cf-grad";
   return (
@@ -17,43 +25,39 @@ export function BrandMark({ size = 36, className = "", draw = false }: BrandMark
       viewBox="0 0 64 64"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={className}
+      className={`block ${className}`}
       aria-hidden="true"
     >
       <defs>
-        <linearGradient id={id} x1="12" y1="8" x2="52" y2="58" gradientUnits="userSpaceOnUse">
+        <linearGradient id={id} x1="10" y1="8" x2="54" y2="58" gradientUnits="userSpaceOnUse">
           <stop offset="0%" stopColor="var(--primary)" />
           <stop offset="100%" stopColor="var(--secondary)" />
         </linearGradient>
       </defs>
-      <rect width="64" height="64" rx="16" fill="var(--bg)" />
+      {/* Tile + hairline border, drawn inside the SVG so the mark is fully
+          self-contained and never fights a wrapper's own rounding/clip. */}
+      <rect x="0.75" y="0.75" width="62.5" height="62.5" rx="17.5" fill="var(--surface)" stroke="var(--border)" strokeWidth="1.5" />
+      {/* Solid shield silhouette */}
       <path
-        d="M32 8 L52 16 L52 32 C52 44 42 54 32 58 C22 54 12 44 12 32 L12 16 Z"
+        d={SHIELD}
         fill={`url(#${id})`}
-        opacity="0.14"
+        fillOpacity="0.9"
+        style={draw ? { opacity: 0, animation: "fade-in 0.5s var(--ease-out) 0.2s forwards" } : undefined}
       />
+      {/* Crisp gradient rim (also the draw-in stroke on the loading screen) */}
       <path
-        d="M32 10 L50 17.5 L50 32 C50 43 41 52 32 56 C23 52 14 43 14 32 L14 17.5 Z"
-        stroke={`url(#${id})`}
-        strokeWidth="1.8"
+        d={SHIELD}
         fill="none"
+        stroke={`url(#${id})`}
+        strokeWidth="2"
         strokeLinejoin="round"
-        style={
-          draw
-            ? { strokeDasharray: 160, strokeDashoffset: 160, animation: "draw 1.2s var(--ease-out) forwards" }
-            : undefined
-        }
+        style={draw ? { strokeDasharray: 172, strokeDashoffset: 172, animation: "draw 1.1s var(--ease-out) forwards" } : undefined}
       />
+      {/* Forge flame, knocked out of the shield in the tile colour */}
       <path
-        d="M32 22 C32 22 38 27 38 33 C38 36.3 35.3 39 32 39 C28.7 39 26 36.3 26 33 C26 30 28 27.5 28 27.5 C28 27.5 28.5 31 30.5 31 C30.5 31 29 28 32 22Z"
-        fill={`url(#${id})`}
-        style={draw ? { opacity: 0, animation: "fade-in 0.5s var(--ease-out) 0.8s forwards" } : undefined}
-      />
-      <path
-        d="M32 26 C32 26 35 29.5 35 32.5 C35 34.4 33.7 36 32 36 C30.3 36 29 34.4 29 32.5 C29 31 30 29.5 30 29.5 C30 29.5 30.3 31.5 31.5 31.5 C31.5 31.5 30.5 29 32 26Z"
-        fill="var(--bg)"
-        opacity="0.6"
-        style={draw ? { opacity: 0, animation: "fade-in 0.5s var(--ease-out) 1s forwards" } : undefined}
+        d={FLAME}
+        fill="var(--surface)"
+        style={draw ? { opacity: 0, animation: "fade-in 0.5s var(--ease-out) 0.9s forwards" } : undefined}
       />
     </svg>
   );
@@ -71,8 +75,8 @@ export default function BrandLogo({ size = 36, withText = true, textClassName = 
   const inner = (
     <>
       <span
-        className="relative rounded-2xl overflow-hidden shrink-0 border border-border shadow-md transition-shadow duration-300 group-hover:shadow-[0_0_28px_-6px_rgb(var(--glow)/0.6)]"
-        style={{ width: size, height: size }}
+        className="relative block shrink-0 shadow-md transition-shadow duration-300 group-hover:shadow-[0_0_28px_-6px_rgb(var(--glow)/0.6)]"
+        style={{ width: size, height: size, borderRadius: size * 0.28 }}
       >
         <BrandMark size={size} />
       </span>

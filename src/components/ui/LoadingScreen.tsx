@@ -29,7 +29,7 @@ export default function LoadingScreen() {
       } catch {
         /* ignore */
       }
-    }, 1500);
+    }, 1000);
     return () => {
       cancelAnimationFrame(id);
       clearTimeout(timer);
@@ -56,7 +56,7 @@ export default function LoadingScreen() {
           >
             <div className="relative">
               <div className="absolute -inset-6 rounded-[28px] border border-primary/15 animate-ping-ring" />
-              <div className="rounded-[22px] border border-border shadow-lg overflow-hidden">
+              <div className="rounded-[24px] shadow-lg overflow-hidden">
                 <BrandMark size={84} draw />
               </div>
             </div>

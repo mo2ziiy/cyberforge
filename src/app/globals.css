@@ -199,6 +199,22 @@ html.theme-switching *::after {
   }
 }
 
+/*
+ * Phones lag on continuously-animated decorative layers (floating/pulsing
+ * blurred blobs, glow rings). Hold them still on small screens — the shapes
+ * stay, only the perpetual compositing stops. Cheap transform-only motion
+ * (the tool marquee) is left running.
+ */
+@media (max-width: 768px) {
+  .animate-float,
+  .animate-float-slow,
+  .animate-pulse-soft,
+  .animate-ping-ring,
+  .animate-spin-slow {
+    animation: none !important;
+  }
+}
+
 @layer components {
 /* ---------- 4. Tone system (theme-aware colored chips) ----------
    Usage: <span class="tone-badge tone-green">Easy</span>
@@ -332,8 +348,8 @@ html.light .tone-slate   { --tone: 71 85 105; }
 
 .glass {
   background: rgb(255 255 255 / 0.04);
-  backdrop-filter: blur(16px) saturate(140%);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
   border: 1px solid rgb(255 255 255 / 0.08);
 }
 html.light .glass {
@@ -341,9 +357,9 @@ html.light .glass {
   border-color: rgb(15 23 42 / 0.08);
 }
 .glass-strong {
-  background: color-mix(in srgb, var(--surface) 88%, transparent);
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
   border: 1px solid var(--border-strong);
   box-shadow: var(--shadow-lg);
 }

@@ -37,13 +37,3 @@ export const COUNTS = {
   glossary: pin("glossary", 80, glossaryTerms.length),
   news: pin("news", 15, newsArticles.length),
 } as const;
-
-/** XP awarded per completed topic, shown to signed-out visitors as a static value. */
-export const DEFAULT_XP_PER_TOPIC = 5;
-
-/**
- * XP a signed-in user actually earns per completed topic.
- * Mirrors POINTS_CONFIG.completeTopic in lib/gamification.ts, which cannot be
- * imported into client components because it pulls in the Mongo connection.
- */
-export const POINTS_PER_TOPIC = 10;

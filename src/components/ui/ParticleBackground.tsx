@@ -52,7 +52,7 @@ export default function ParticleBackground({ className = "" }: { className?: str
 
     const seed = () => {
       particles.length = 0;
-      const count = Math.min(90, Math.floor((w * h) / 16000));
+      const count = Math.min(55, Math.floor((w * h) / 24000));
       for (let i = 0; i < count; i++) {
         particles.push({
           x: Math.random() * w,
@@ -116,9 +116,9 @@ export default function ParticleBackground({ className = "" }: { className?: str
           const dx = p.x - q.x;
           const dy = p.y - q.y;
           const d2 = dx * dx + dy * dy;
-          if (d2 < 110 * 110) {
+          if (d2 < 95 * 95) {
             const d = Math.sqrt(d2);
-            ctx.globalAlpha = (1 - d / 110) * 0.16;
+            ctx.globalAlpha = (1 - d / 95) * 0.16;
             ctx.strokeStyle = colors[p.ci];
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);

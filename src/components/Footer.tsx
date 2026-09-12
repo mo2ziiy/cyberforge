@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { Linkedin, ArrowUpRight, Mail } from "lucide-react";
 import BrandLogo, { BrandMark } from "@/components/ui/BrandLogo";
 import { XLogo } from "@/components/ui/XLogo";
@@ -27,26 +26,6 @@ const footerLinks = {
 };
 
 export default function Footer() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    fetch("/api/auth/me")
-      .then((r) => (r.ok ? r.json() : null))
-      .then((data) => setIsLoggedIn(Boolean(data?.user)))
-      .catch(() => {});
-  }, []);
-
-  const accountLinks = isLoggedIn
-    ? [
-        { href: "/dashboard", label: "Dashboard" },
-        { href: "/profile", label: "Profile" },
-      ]
-    : [
-        { href: "/sign-in", label: "Sign in" },
-        { href: "/sign-up", label: "Create account" },
-        { href: "/reset-password", label: "Reset password" },
-      ];
-
   const socials = [
     { href: SITE.github, label: "GitHub", Icon: GithubLogo },
     { href: SITE.x, label: "X", Icon: XLogo },
@@ -116,20 +95,7 @@ export default function Footer() {
             </div>
           ))}
 
-          <div className="md:col-span-1">
-            <h3 className="footer-heading">Account</h3>
-            <ul className="space-y-2.5">
-              {accountLinks.map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href} className="text-sm text-muted hover:text-foreground link-underline transition-colors">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="col-span-2 md:col-span-1">
+          <div className="col-span-2 md:col-span-2">
             <h3 className="footer-heading">Contact</h3>
             <div className="flex flex-col items-start gap-3">
               <a href={`mailto:${SITE.email}`} className="block text-sm text-muted hover:text-primary transition-colors break-all">

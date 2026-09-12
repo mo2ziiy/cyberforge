@@ -23,6 +23,7 @@ import {
   ArrowDown,
 } from "lucide-react";
 import { NAV_LINKS } from "@/lib/site";
+import { performSearch } from "@/lib/search";
 
 interface SearchResult {
   type: string;
@@ -96,12 +97,10 @@ export default function CommandPalette({ open, onClose }: Props) {
       setLoading(false);
       return;
     }
-    setLoading(true);
-    fetch(`/api/search?q=${encodeURIComponent(q.trim())}`)
-      .then((r) => r.json())
-      .then((d) => setResults((d.results ?? []).slice(0, 12)))
-      .catch(() => setResults([]))
-      .finally(() => setLoading(false));
+    // Search runs entirely client-side over the bundled data files — the site
+    // ships as a static export with no backend.
+    setResults(performSearch(q).slice(0, 12));
+    setLoading(false);
   }, []);
 
   const onChange = (v: string) => {
