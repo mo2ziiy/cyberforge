@@ -7,8 +7,9 @@ import type { NextConfig } from "next";
  * so production assets/routes need the "/cyberforge" base path. In local `next dev`
  * the base path is omitted so the app stays reachable at http://localhost:3000.
  *
- * Server features (API routes, middleware, redirects) are not available on a static
- * host — the backend code is kept under src/_disabled/ for a future real deployment.
+ * This is a fully static frontend: there is no backend, authentication, or
+ * database. Search runs client-side over the bundled data files, so the export
+ * needs no server features (API routes, middleware, redirects).
  */
 const repo = "cyberforge";
 const isProd = process.env.NODE_ENV === "production";
